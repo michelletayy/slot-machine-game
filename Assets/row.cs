@@ -5,10 +5,18 @@ using UnityEngine;
 public class row : MonoBehaviour
 {
     float x = 0.00025f;
+    public float y; 
     // Start is called before the first frame update
     // public int stop = 0;
     void Start()
     {
+        y = transform.position.y; 
+    }
+
+
+    public void SetY(float newy)
+    {
+        transform.position = new Vector3(transform.position.x, newy, transform.position.z);
     }
 
     public void startRotating(int stop)

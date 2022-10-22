@@ -13,10 +13,10 @@ public class generate : MonoBehaviour
     // }
     public int[] generateSeq()
     {
-         int[] ans = new int[3]; //List, array: [0,0,0]
+        int[] ans = new int[3]; //List, array: [0,0,0]
         int x = 5;
         x = (Random.Range(1,10));
-        if (x <= 7){
+        if (x <= 2){
             ans = mixed();
         } else {ans = matching();}
         return ans; 

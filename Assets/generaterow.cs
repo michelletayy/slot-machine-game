@@ -100,13 +100,16 @@ coinText.GetComponent<TextMeshProUGUI>().text = PlayerCoin.ToString() + " Coins"
             winner = true;
         }
         //mixing or matching numbers
+        float[] rowpos = new float[3];
         foreach(GameObject i in rows) //go through all our slots and spin them all
         {
             //[1,2,3] 
             i.GetComponent<row>().startRotating(ans[count]); //ROTATE() using the sequence we made
+            rowpos[count] = i.GetComponent<row>().y;
             count++;
             yield return new WaitForSeconds(4.25f);
         }
+
         if (winner == true)
         {
             winTime = true;
@@ -157,9 +160,19 @@ coinText.GetComponent<TextMeshProUGUI>().text = PlayerCoin.ToString() + " Coins"
             print("I am a winner");
             winScript.GetComponent<win>().flashLights();
             winScript.GetComponent<win>().panText();
+            
+            
+            
+           
             winner = false;
         
         }
+       
+      
+        yield return new WaitForSeconds(2.0f);
+        rows[0].transform.position = new Vector3(rows[0].transform.position.x, 1.31f, rows[0].transform.position.z);
+        rows[1].transform.position = new Vector3(rows[1].transform.position.x, 1.31f, rows[1].transform.position.z);
+        rows[2].transform.position = new Vector3(rows[2].transform.position.x, 1.31f, rows[2].transform.position.z);
         
     }
 
