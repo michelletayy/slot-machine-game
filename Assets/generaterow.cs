@@ -105,7 +105,7 @@ coinText.GetComponent<TextMeshProUGUI>().text = PlayerCoin.ToString() + " Coins"
             //[1,2,3] 
             i.GetComponent<row>().startRotating(ans[count]); //ROTATE() using the sequence we made
             count++;
-            yield return new WaitForSeconds(4.25f);
+            yield return new WaitForSeconds(1f);
         }
         if (winner == true)
         {
@@ -160,6 +160,14 @@ coinText.GetComponent<TextMeshProUGUI>().text = PlayerCoin.ToString() + " Coins"
             winner = false;
         
         }
+        else {
+                     for(int i = 0; i < 3; i++) //go through all our slots and spin them all
+            {
+            //[1,2,3] 
+            rows[i].transform.position = new Vector3(rows[i].transform.position.x, 1.31f, rows[i].transform.position.z);
+           
+         }
+        }
         
     }
 
@@ -176,7 +184,12 @@ coinText.GetComponent<TextMeshProUGUI>().text = PlayerCoin.ToString() + " Coins"
             timeRemaining = 3.5f;
             winScript.GetComponent<win>().TimeUp = false;
             winScript.GetComponent<win>().text.transform.position = winScript.GetComponent<win>().textpos;
-
+                for(int i = 0; i < 3; i++) //go through all our slots and spin them all
+            {
+            //[1,2,3] 
+            rows[i].transform.position = new Vector3(rows[i].transform.position.x, 1.31f, rows[i].transform.position.z);
+           
+         }
 
         }
     }

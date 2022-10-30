@@ -28,34 +28,41 @@ public class row : MonoBehaviour
             float current = Mathf.Round(transform.position.y * 100f) / 100f;
             if (current == -0.99f && stop == 3 ){
                 print("marsh");
+                transform.position = new Vector3(transform.position.x, -0.99f, transform.position.z);
+
                 break; //marsh  break
             }
             if (current == 0.56f && stop == 1){
                 print("gumdrop");
+                transform.position = new Vector3(transform.position.x, 0.56f, transform.position.z);
                 break; //gumdrop  break
             }
             
             
             if (current == -0.19f && stop == 2){
                 print("cotton candy");
+                transform.position = new Vector3(transform.position.x, -0.19f, transform.position.z);
                 break; //cotton candy  break
             }
 
              
             if (current == 1.31f && stop == 0){
                 print("chocolate");
+                transform.position = new Vector3(transform.position.x, 1.31f, transform.position.z);
                 break; //choclate break
             }
 
              
             if (current == -1.74f && stop == 4){
                 print("candy");
+                transform.position = new Vector3(transform.position.x, -1.74f, transform.position.z);
                 break; //candy  break
             }
 
              
             if (current == -2.54f && stop == 5){
                 print("lollipop");
+                transform.position = new Vector3(transform.position.x, -2.54f, transform.position.z);
                 break; //lollipop  break
             }
 
