@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.Events;
 
 public class generaterow : MonoBehaviour
 {
+    
+    public bool HandlePulled = false;
 
     //Global Variable
     public GameObject[] rows;
@@ -27,6 +30,7 @@ public class generaterow : MonoBehaviour
 
     public bool winTime = false;
    
+    private String[] icons = new String[]{"chocolate", "gumdrop", "cotton", "marsh", "candy", "lollipop"};
 
     // Start is called before the first frame update
     void Start()
@@ -70,10 +74,10 @@ public class generaterow : MonoBehaviour
         {
             print("going into 3");
             cointotal=3;
-            PlayerCoin = PlayerCoin -3;
+            PlayerCoin = PlayerCoin -3; 
         }
      
-coinText.GetComponent<TextMeshProUGUI>().text = PlayerCoin.ToString() + " Coins";
+        coinText.GetComponent<TextMeshProUGUI>().text = PlayerCoin.ToString() + " Coins";
         //The first if statement should check if the user inputed 1 coint
         // print("user Inputed 1 coint")
         //the second if statment should check if the user inputed 2  coins
@@ -99,14 +103,22 @@ coinText.GetComponent<TextMeshProUGUI>().text = PlayerCoin.ToString() + " Coins"
         else {
             winner = true;
         }
+        //chocolate 0
+        //gumdrop 1 
         //mixing or matching numbers
+        foreach (int i in ans){
+            print(i);
+            print(icons[i]);
+            }
+
         foreach(GameObject i in rows) //go through all our slots and spin them all
         {
             //[1,2,3] 
-            i.GetComponent<row>().startRotating(ans[count]); //ROTATE() using the sequence we made
+            i.GetComponent<row1>().startRotating(ans[count]); //ROTATE() using the sequence we made
             count++;
-            yield return new WaitForSeconds(1f);
+            // 
         }
+        yield return new WaitForSeconds(1f);
         if (winner == true)
         {
             winTime = true;

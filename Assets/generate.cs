@@ -33,8 +33,6 @@ public class generate : MonoBehaviour
             z = Random.Range(0,5);
         }
         int[] g = new int[]{x,y,z};
-        print(g);
-        foreach(int i in g){print (i);}
         return g;
 
     }
