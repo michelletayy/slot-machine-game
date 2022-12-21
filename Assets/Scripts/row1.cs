@@ -41,7 +41,7 @@ public class row1 : MonoBehaviour
 
     void checkLast(){
         if (rowNum == 3) {
-            GameObject.Find("rowspinner").GetComponent<generaterow>().source.Stop();
+            GameObject.Find("generaterow").GetComponent<generaterow>().source.Stop();
         }
     }
 

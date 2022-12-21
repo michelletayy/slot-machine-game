@@ -15,6 +15,8 @@ public class timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Screen Width : " + Screen.width);
+        Debug.Log("Screen Height : " + Screen.height);
         Timer = PlayerPrefs.GetFloat("timer");
         InvokeRepeating("SaveNumber", 1f, 5.0f);
         timerIsRunning = true;

@@ -21,6 +21,8 @@ public class generaterow : MonoBehaviour
     public AudioClip spinners;
     public float timeRemaining = 3.5f;
 
+    public bool badSlot;
+
 
     public GameObject winScript;
     public GameObject textinput;
@@ -54,7 +56,7 @@ public class generaterow : MonoBehaviour
         if (PlayerCoin == 0){
             StartCoroutine(loss());
         }
-
+        cointotal = 0;
         if (textcoin == "1")
         {
             print("going into 1");
@@ -140,10 +142,15 @@ public class generaterow : MonoBehaviour
         {
             winTime = true;
             source.PlayOneShot(winningSound);
-            PlayerCoin = BetCalculation(cointotal, PlayerCoin, icons[ans[0]]);
+            if (cointotal != 0) {
+                PlayerCoin = BetCalculation(cointotal, PlayerCoin, icons[ans[0]]);
+            }
+            if (badSlot == false){
+                winScript.GetComponent<win>().flashLights();
+                winScript.GetComponent<win>().panText();
+            }
             coinText.GetComponent<TextMeshProUGUI>().text = PlayerCoin.ToString() + " Coins";
-            winScript.GetComponent<win>().flashLights();
-            winScript.GetComponent<win>().panText();
+            
             winner = false;
         
         }
@@ -158,61 +165,61 @@ public class generaterow : MonoBehaviour
     }
 
     int BetCalculation(int coins, int player, string streak){
-         if (streak == "lollipop")
-            {
-                if (coins == 3)
+            if (streak == "lollipop")
                 {
-                    coins = coins * 3;
+                    if (coins == 3)
+                    {
+                        coins = coins * 3;
+                    }
+                    else {
+                        coins = coins + 1;
+                    }
+                    
                 }
-                else {
-                    coins = coins + 1;
-                }
-                
-            }
-            if (streak == "candy")
-            {
-                if (coins == 3)
+                if (streak == "candy")
                 {
-                    coins = coins * 3;
-                }
-                else {
-                    coins = coins + 1;
-                }
-               
-            }
-            if (streak == "marsh")
-            {
-                if (coins > 1) {
-                    coins = coins * 2;
-                }
-                else {
-                    coins = coins + 1;
-                }
+                    if (coins == 3)
+                    {
+                        coins = coins * 3;
+                    }
+                    else {
+                        coins = coins + 1;
+                    }
                 
-               
-            }
-            if (streak == "cotton")
-            {
-                if (coins > 1) {
-                    coins = coins * 2;
                 }
-                else {
-                    coins = coins + 1;
-                }
+                if (streak == "marsh")
+                {
+                    if (coins > 1) {
+                        coins = coins * 2;
+                    }
+                    else {
+                        coins = coins + 1;
+                    }
+                    
                 
-            }
-            if (streak == "gumdrop")
-            {
-                if (coins > 0) {
+                }
+                if (streak == "cotton")
+                {
+                    if (coins > 1) {
+                        coins = coins * 2;
+                    }
+
+                    
+                }
+                if (streak == "gumdrop")
+                {
+                    if (coins > 0) {
+                        coins = coins + 1 ;
+                    }
+                }
+                if (streak == "chocolate")
+                {
+                    if (coins > 0) {
                     coins = coins + 1 ;
+                    }
                 }
-            }
-            if (streak == "chocolate")
-            {
-                if (coins > 0) {
-                   coins = coins + 1 ;
-                }
-            }
+
+            
         return player+coins;
     }
 
@@ -227,8 +234,11 @@ public class generaterow : MonoBehaviour
         else {
             winTime = false;
             timeRemaining = 3.5f; //How long we want to win
-            winScript.GetComponent<win>().TimeUp = false;
-            winScript.GetComponent<win>().text.transform.position = winScript.GetComponent<win>().textpos;
+            if (badSlot == false){
+                winScript.GetComponent<win>().TimeUp = false;
+                winScript.GetComponent<win>().text.transform.position = winScript.GetComponent<win>().textpos;
+            }
+           
                 for(int i = 0; i < 3; i++) //go through all our slots and spin them all
             {
             //[1,2,3] 
