@@ -5,10 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+  - enabled: 0
+    path: Assets/Scenes/GoodSlot.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 0
     path: Assets/Scenes/badslot.unity
     guid: 4f59495867a36c84fb32c6dcda376510
+  - enabled: 0
+    path: Assets/Scenes/SlotNoSound.unity
+    guid: b6fb7c13104be404ab79c296fe35fdf4
+  - enabled: 1
+    path: Assets/Scenes/NoSound.unity
+    guid: acbf48d9f6b59fb4da6408d4c3cc9757
   m_configObjects: {}

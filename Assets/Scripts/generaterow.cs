@@ -107,7 +107,7 @@ public class generaterow : MonoBehaviour
 
     IEnumerator RunGameWait()
     {
-        source.PlayOneShot(handlePull);
+        //source.PlayOneShot(handlePull);
         int count = 0;
         bool winner = false;
        
@@ -127,7 +127,7 @@ public class generaterow : MonoBehaviour
         }
      
 
-        source.PlayOneShot(spinners);
+        //source.PlayOneShot(spinners);
         foreach(GameObject i in rows) //go through all our slots and spin them all
         {
             i.GetComponent<row1>().startRotating(ans[count]); //ROTATE() using the sequence we made
@@ -141,7 +141,7 @@ public class generaterow : MonoBehaviour
         if (winner == true)
         {
             winTime = true;
-            source.PlayOneShot(winningSound);
+            //source.PlayOneShot(winningSound);
             if (cointotal != 0) {
                 PlayerCoin = BetCalculation(cointotal, PlayerCoin, icons[ans[0]]);
             }

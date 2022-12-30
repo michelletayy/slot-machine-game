@@ -41,7 +41,7 @@ public class row1 : MonoBehaviour
 
     void checkLast(){
         if (rowNum == 3) {
-            GameObject.Find("rowspinner").GetComponent<generaterow>().source.Stop();
+            //GameObject.Find("generaterow").GetComponent<generaterow>().source.Stop();
         }
     }
 
@@ -62,7 +62,7 @@ public class row1 : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, 1.31f, transform.position.z);
                 // break; //choclate break
                 start = false;
-                source.PlayOneShot(bling);
+                //source.PlayOneShot(bling);
                 checkLast();
             }
             // current == 0.56f
@@ -70,7 +70,7 @@ public class row1 : MonoBehaviour
             if (current >= 0.40f && current <= 0.70f && stop == 1){
                 transform.position = new Vector3(transform.position.x, 0.56f, transform.position.z);
                 start = false;
-                source.PlayOneShot(bling);
+                //source.PlayOneShot(bling);
                 checkLast();
                 // break; //gumdrop  break
             }
@@ -81,7 +81,7 @@ public class row1 : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, -0.19f, transform.position.z);
                 // break; //cotton candy  break
                 start = false;
-                source.PlayOneShot(bling);
+                //source.PlayOneShot(bling);
                 checkLast();
 
             }
@@ -92,7 +92,7 @@ public class row1 : MonoBehaviour
                 
                 transform.position = new Vector3(transform.position.x, -0.99f, transform.position.z);
                 start = false;
-                source.PlayOneShot(bling);
+                //source.PlayOneShot(bling);
                 checkLast();
 
                 // break; //marsh  break
@@ -103,7 +103,7 @@ public class row1 : MonoBehaviour
                 
                 transform.position = new Vector3(transform.position.x, -1.74f, transform.position.z);
                 start = false;
-                source.PlayOneShot(bling);
+                //source.PlayOneShot(bling);
                 checkLast();
 
                 // break; //candy  break
@@ -114,7 +114,7 @@ public class row1 : MonoBehaviour
                 
                 transform.position = new Vector3(transform.position.x, -2.54f, transform.position.z);
                 start = false;
-                source.PlayOneShot(bling);
+                //source.PlayOneShot(bling);
                 checkLast();
 
                 // break; //lollipop  break

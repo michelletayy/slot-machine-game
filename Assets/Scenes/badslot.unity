@@ -716,8 +716,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 375981284}
-        m_TargetAssemblyTypeName: timer, Assembly-CSharp
+      - m_Target: {fileID: 375981286}
+        m_TargetAssemblyTypeName: timer2, Assembly-CSharp
         m_MethodName: DisplayTime
         m_Mode: 1
         m_Arguments:
@@ -922,7 +922,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 375981285}
-  - component: {fileID: 375981284}
+  - component: {fileID: 375981286}
   m_Layer: 0
   m_Name: timer
   m_TagString: Untagged
@@ -930,22 +930,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &375981284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 375981283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbfb08c8201c7be44bc1239110f5c420, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Timer: 0
-  timeText: {fileID: 858574642}
-  timeRemaining: 10
-  timerIsRunning: 0
 --- !u!4 &375981285
 Transform:
   m_ObjectHideFlags: 0
@@ -961,6 +945,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &375981286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375981283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7007e6a1cd250284bb9f5b1110852d1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timer: 0
+  timeText: {fileID: 858574642}
+  timeRemaining: 10
+  timerIsRunning: 0
 --- !u!1 &405365741
 GameObject:
   m_ObjectHideFlags: 0
