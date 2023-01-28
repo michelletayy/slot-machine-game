@@ -23,7 +23,7 @@ public class win : MonoBehaviour
 
     public void flashLights() {
         print("I am in flashing lights");
-                // source.PlayOneShot(win1);
+        // source.PlayOneShot(win1);
         StartCoroutine(waitanddFlash());
     }
 

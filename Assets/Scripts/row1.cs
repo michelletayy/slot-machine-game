@@ -12,7 +12,7 @@ public class row1 : MonoBehaviour
     private int numRotations;
     private AudioSource source;
     public AudioClip bling;
-    
+    public bool noSound = false;
     // Start is called before the first frame update
     // public int stop = 0;
     void Start()
@@ -20,15 +20,19 @@ public class row1 : MonoBehaviour
         source = gameObject.AddComponent<AudioSource>() as AudioSource;
     }
 
+    //it takes 1 input, the number to stop the spinner at 
+
     public void startRotating(int num)
     {
-        //go will be True when we start Rotating
+        //We will change this instance varible to trigger the row movement
         start = true;
         numRotations = 0;
         //num will be the number we need to stop at
         ans = num;
     }
-
+    
+    //iS BEING CALLED ONCE PER FRAME SINCE ITS BEING CALLED IN UPDATE() 
+    //is called once a frame is is moved a slight amount every time this runs
     public void rotate(){
         Vector3 desiredPosition = transform.position + new Vector3(0, -0.20f, 0);
         transform.position = Vector3.Lerp(transform.position,desiredPosition,25*Time.deltaTime);
@@ -44,6 +48,8 @@ public class row1 : MonoBehaviour
             //GameObject.Find("generaterow").GetComponent<generaterow>().source.Stop();
         }
     }
+
+    //This will stop the rotation when it hits the stop value 
 
     public void rotate(int stop)
     {
@@ -62,7 +68,9 @@ public class row1 : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, 1.31f, transform.position.z);
                 // break; //choclate break
                 start = false;
-                //source.PlayOneShot(bling);
+                if (noSound == false) {
+                source.PlayOneShot(bling);
+                }
                 checkLast();
             }
             // current == 0.56f
@@ -70,7 +78,9 @@ public class row1 : MonoBehaviour
             if (current >= 0.40f && current <= 0.70f && stop == 1){
                 transform.position = new Vector3(transform.position.x, 0.56f, transform.position.z);
                 start = false;
-                //source.PlayOneShot(bling);
+                if (noSound == false) {
+                source.PlayOneShot(bling);
+                }
                 checkLast();
                 // break; //gumdrop  break
             }
@@ -81,7 +91,9 @@ public class row1 : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, -0.19f, transform.position.z);
                 // break; //cotton candy  break
                 start = false;
-                //source.PlayOneShot(bling);
+                if (noSound == false) {
+                source.PlayOneShot(bling);
+                }
                 checkLast();
 
             }
@@ -92,7 +104,9 @@ public class row1 : MonoBehaviour
                 
                 transform.position = new Vector3(transform.position.x, -0.99f, transform.position.z);
                 start = false;
-                //source.PlayOneShot(bling);
+                if (noSound == false) {
+                source.PlayOneShot(bling);
+                }
                 checkLast();
 
                 // break; //marsh  break
@@ -103,7 +117,9 @@ public class row1 : MonoBehaviour
                 
                 transform.position = new Vector3(transform.position.x, -1.74f, transform.position.z);
                 start = false;
-                //source.PlayOneShot(bling);
+                if (noSound == false) {
+                source.PlayOneShot(bling);
+                }
                 checkLast();
 
                 // break; //candy  break
@@ -114,7 +130,9 @@ public class row1 : MonoBehaviour
                 
                 transform.position = new Vector3(transform.position.x, -2.54f, transform.position.z);
                 start = false;
-                //source.PlayOneShot(bling);
+                if (noSound == false) {
+                source.PlayOneShot(bling);
+                }
                 checkLast();
 
                 // break; //lollipop  break
@@ -138,13 +156,16 @@ public class row1 : MonoBehaviour
 
 
     // Update is called once per frame
+    //when the instance variable start is set to true,
+    //it will trigger the row to start rotating 
     void Update()
     {
         
         // transform.position = new Vector2(transform.position.x,transform.position.y - .05f) * Time.deltaTime;
+
         if (start == true){
-            // print(start);
-            if (numRotations < rowNum) {
+            //When the number of rotations is less the rowNumber it will stop the row at the icon
+            if (numRotations - 1 < rowNum) {
                 rotate();
             }
             else {

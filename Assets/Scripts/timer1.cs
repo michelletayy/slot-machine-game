@@ -17,7 +17,7 @@ public class timer1 : MonoBehaviour
     {
         Debug.Log("Screen Width : " + Screen.width);
         Debug.Log("Screen Height : " + Screen.height);
-        Timer = PlayerPrefs.GetFloat("timerNoSoundSound");
+        Timer = PlayerPrefs.GetFloat("timerNoSoundSoundSound");
         InvokeRepeating("SaveNumber", 1f, 5.0f);
         timerIsRunning = true;
        
@@ -25,7 +25,7 @@ public class timer1 : MonoBehaviour
 
     void SaveNumber()
     {
-        PlayerPrefs.SetFloat("timerNoSoundSound", Timer);
+        PlayerPrefs.SetFloat("timerNoSoundSoundSound", Timer);
     }
 
     

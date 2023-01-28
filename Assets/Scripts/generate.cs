@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class generate : MonoBehaviour
 {
-    // Start is called before the first frame update
-    // public void call()
-    // {
-    //    
-           
+
+  
     
-    // }
+    // Will determine whether to generate a 
+    // mixed sequence or a matching sequence
+
+    //Mixed - 70%
+    //Matching - 30%
     public int[] generateSeq()
     {
          int[] ans = new int[3]; //List, array: [0,0,0]
@@ -22,12 +23,22 @@ public class generate : MonoBehaviour
         return ans; 
     }
 
+    //Will output a mixed sequence
+    //It ensures all the characters are 
+    //different 
+
     int[] mixed(){
         int x = (Random.Range(0,5));
+        //makes sure the first doesn't
+        //match the second by constantly 
+        //rerolling it
         int y = (Random.Range(0,5));
         while(x==y){
             y = Random.Range(0,5);
         }
+        //checks for the third number,
+        //rerolls until it doesn't match
+        //either of the past two numbers
         int z = (Random.Range(0,5));
         while(y==z && z==x){
             z = Random.Range(0,5);
@@ -37,7 +48,17 @@ public class generate : MonoBehaviour
 
     }
 
+    //Outputs a matching sequence
+    //determines the prize ranges
+     //5% Lolipop
+      //10% Candy
+       //15 Marsh
+       //20 Cotton
+        //20 Gumdrop
+          //40 Hearts
     int[] matching(){
+        //generates a random number from 
+        //0 - 100
         int x = (Random.Range(0,100));
         int[] ans = new int[3];
         //5% Lolipop

@@ -17,7 +17,7 @@ public class timer : MonoBehaviour
     {
         Debug.Log("Screen Width : " + Screen.width);
         Debug.Log("Screen Height : " + Screen.height);
-        Timer = PlayerPrefs.GetFloat("timergoodgood");
+        Timer = PlayerPrefs.GetFloat("timergoodgoodgoodgood");
         InvokeRepeating("SaveNumber", 1f, 5.0f);
         timerIsRunning = true;
        
@@ -25,7 +25,7 @@ public class timer : MonoBehaviour
 
     void SaveNumber()
     {
-        PlayerPrefs.SetFloat("timergoodgood", Timer);
+        PlayerPrefs.SetFloat("timergoodgoodgoodgood", Timer);
     }
 
     

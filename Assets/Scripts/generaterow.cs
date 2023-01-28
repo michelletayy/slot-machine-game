@@ -7,9 +7,36 @@ using System;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
+
+//System Overview 
+
+//RunGame() will be triggered when you click the lever button
+//It will determine if you can spin. 
+//... If you can play
+//RunGameWait() generate a sequence using the generate script, then 
+//spin the rows using the row1 script. Wait 4 seconds for the rows to finish 
+//spinning, 
+    //If you won, the winscript will be called to play the winning animations then betcaluclation to determine how much you won
+//Then the lever is reactivated 
+
+
+
+
+
+
+
+
+
 public class generaterow : MonoBehaviour
 {
-    
+    //Variable
+
+
+    //Instance Variables, declared outside of every method
+    //begin with either public, private 
+    //public - Visible Anywhere, I can acess this varible from a different script
+    //private - WE can only acess this varible inside of this file aka generaterow
+
     public bool HandlePulled = false;
 
     //Global Variable
@@ -26,7 +53,7 @@ public class generaterow : MonoBehaviour
 
     public GameObject winScript;
     public GameObject textinput;
-    private int cointotal;
+    private int cointotal = 1;
     public InputField inputter;
 
     public GameObject coinText;
@@ -36,7 +63,11 @@ public class generaterow : MonoBehaviour
    
     private String[] icons = new String[]{"chocolate", "gumdrop", "cotton", "marsh", "candy", "lollipop"};
 
-    public GameObject button;   
+    public GameObject button; 
+
+    public GameObject inputCoins;  
+
+    public bool noSound = false;
 
     // Start is called before the first frame update
     void Start()
@@ -47,37 +78,45 @@ public class generaterow : MonoBehaviour
 
     //Going to generate a sequence: generate.cs
     //spin all the rows: row.cs
-    //to that sequence
-    public void RunGame() //when you clikc the button it will run this method
+
+    //These two methods control the button and how much the player will bet
+
+
+
+    public void buttonDown() {
+        if (cointotal != 1) {
+            cointotal = cointotal - 1;
+        }
+        inputCoins.GetComponent<TextMeshProUGUI>().text = cointotal.ToString();
+        
+    }
+
+    public void buttonUp() {
+        if (cointotal != 3) {
+            cointotal = cointotal + 1;
+        }
+        inputCoins.GetComponent<TextMeshProUGUI>().text = cointotal.ToString();
+    }
+
+
+
+
+    //This method is run everytime you press the lever
+    //It checks your total coins and if you have at least 1 coin you may spin
+    //
+
+    public void RunGame() 
     {
-      
-        string textcoin = inputter.text;
-        button.GetComponent<Button>().interactable = false;
-        if (PlayerCoin == 0){
+        string textcoin = inputter.text; //ignore this line
+        button.GetComponent<Button>().interactable = false; //DISABLES BUTTON
+        if (PlayerCoin == 0){ //we don't have any coins left
             StartCoroutine(loss());
         }
-        cointotal = 0;
-        if (textcoin == "1")
-        {
-            print("going into 1");
-            cointotal = 1;
-           
-        }
-        if (textcoin == "2")
-        {
-            print("going into 2");
-            cointotal = 2;
-            
-        }
-        if (textcoin == "3")
-        {
-            print("going into 3");
-            cointotal=3;
-            
-        }
+
         
 
-        if (PlayerCoin - cointotal < 0) {
+        if (PlayerCoin - cointotal < 0) { //if you don't have enough coins to bet the amount you choose 
+                                            //ex you have 2 coins and try to bet 3
             StartCoroutine(notEnough());
             
         }
@@ -86,18 +125,16 @@ public class generaterow : MonoBehaviour
             coinText.GetComponent<TextMeshProUGUI>().text = PlayerCoin.ToString() + " Coins";
             StartCoroutine(RunGameWait());
         }
-     
-        
-        
-   
     }
 
+    //Will wait 3 seconds then reload the current scene
     IEnumerator loss(){
         coinText.GetComponent<TextMeshProUGUI>().text = "No Coins, Restarting!";
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    //Will wait 3 seconds then let you pull the lever again
     IEnumerator notEnough(){
         coinText.GetComponent<TextMeshProUGUI>().text = "Not enough";
         yield return new WaitForSeconds(3f);
@@ -105,13 +142,21 @@ public class generaterow : MonoBehaviour
         coinText.GetComponent<TextMeshProUGUI>().text = PlayerCoin.ToString() + " Coins";
     }
 
+    //This is the function that will generate a sequence of icons, and trigger the rows to spin
+    //RunGameWait, IEnumerator function which allows us to Wait
     IEnumerator RunGameWait()
     {
-        //source.PlayOneShot(handlePull);
+        if (noSound == false) {
+            source.PlayOneShot(handlePull);
+        }
+       
         int count = 0;
         bool winner = false;
        
-        int[] ans = generate.GetComponent<generate>().generateSeq(); //call generate return list of
+        //We Generate this sequence in another script
+        int[] ans = generate.GetComponent<generate>().generateSeq(); 
+
+
         if (ans[0] != ans[1])
         {
             print("Mixed");
@@ -126,8 +171,12 @@ public class generaterow : MonoBehaviour
             print(icons[i]);
         }
      
+        if (noSound == false) {
+            source.PlayOneShot(spinners);
+        }
+        
+        //after generating a sequence we spin all the rows using the row1 script
 
-        //source.PlayOneShot(spinners);
         foreach(GameObject i in rows) //go through all our slots and spin them all
         {
             i.GetComponent<row1>().startRotating(ans[count]); //ROTATE() using the sequence we made
@@ -135,13 +184,16 @@ public class generaterow : MonoBehaviour
         }
 
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(4f); //will pause the game to wait for the rows to finish spinning. 
+                                    //We need to wait for the user to see what sequence they got before showing them winning animations
         
         print("Past Waiting");
         if (winner == true)
         {
             winTime = true;
-            //source.PlayOneShot(winningSound);
+            if (noSound == false) {
+                source.PlayOneShot(winningSound);
+            }
             if (cointotal != 0) {
                 PlayerCoin = BetCalculation(cointotal, PlayerCoin, icons[ans[0]]);
             }
@@ -164,6 +216,18 @@ public class generaterow : MonoBehaviour
         
     }
 
+    //Takes in three inputs, the amound of couns the player betted, the amount of coins the player has in total,
+    // and the streak the player obtained
+
+     //5% Lolipop if you bet three coins you get triple back, 1 else 
+      //10% Candy if you bet three coins you get triple back, 1 else 
+      
+       //15 Marsh if you bet more then 1 coin you get double back, 1 else  
+       //20 Cotton if you bet more then 1 coin you get double back, 1 else 
+
+        //20 Gumdrop 1 back 
+          //40 Hearts 1 back
+    //Based on the streak AND The amount of coins the player betted will determine their prize
     int BetCalculation(int coins, int player, string streak){
             if (streak == "lollipop")
                 {
