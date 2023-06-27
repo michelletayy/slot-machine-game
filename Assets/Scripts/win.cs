@@ -5,7 +5,8 @@ using System;
 public class win : MonoBehaviour
 {
     private AudioSource source;
-
+    public Sprite brightLight;
+    public Sprite dimLight;
     public GameObject[] lights;
     public GameObject text;
     public float waitTillNext = 0.5f;
@@ -37,9 +38,9 @@ public class win : MonoBehaviour
                 TimeUp = true;
                 break;
             }
-            light.GetComponent<SpriteRenderer>().color = Color.white;
+            light.GetComponent<SpriteRenderer>().sprite = brightLight;
             yield return new WaitForSeconds(waitTillNext);
-            light.GetComponent<SpriteRenderer>().color = Color.gray;
+            light.GetComponent<SpriteRenderer>().sprite = dimLight;
             yield return new WaitForSeconds(waitTillNext);
         }
         if(TimeUp == false){
